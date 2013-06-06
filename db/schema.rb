@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606211145) do
+ActiveRecord::Schema.define(:version => 20130606211623) do
 
   create_table "candidates", :force => true do |t|
     t.string   "name"
@@ -37,5 +37,15 @@ ActiveRecord::Schema.define(:version => 20130606211145) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "candidate_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "votes", ["candidate_id"], :name => "index_votes_on_candidate_id"
+  add_index "votes", ["student_id"], :name => "index_votes_on_student_id"
 
 end
