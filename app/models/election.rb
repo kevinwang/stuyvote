@@ -1,3 +1,4 @@
 class Election < ActiveRecord::Base
-  attr_accessible :enabled, :grade, :name, :num_choices
+  has_many :candidates, :dependent => :destroy
+  attr_accessible :enabled, :freshmen_eligible, :sophomores_eligible, :juniors_eligible, :seniors_eligible, :name, :num_choices
 end

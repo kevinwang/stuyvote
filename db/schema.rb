@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606211623) do
+ActiveRecord::Schema.define(:version => 20130606212546) do
 
   create_table "candidates", :force => true do |t|
     t.string   "name"
@@ -24,11 +24,14 @@ ActiveRecord::Schema.define(:version => 20130606211623) do
 
   create_table "elections", :force => true do |t|
     t.string   "name"
-    t.integer  "grade"
     t.integer  "num_choices"
     t.boolean  "enabled"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.boolean  "freshmen_eligible"
+    t.boolean  "sophomores_eligible"
+    t.boolean  "juniors_eligible"
+    t.boolean  "seniors_eligible"
   end
 
   create_table "students", :force => true do |t|
