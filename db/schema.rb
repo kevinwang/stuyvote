@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606210947) do
+ActiveRecord::Schema.define(:version => 20130606211145) do
+
+  create_table "candidates", :force => true do |t|
+    t.string   "name"
+    t.integer  "election_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "candidates", ["election_id"], :name => "index_candidates_on_election_id"
 
   create_table "elections", :force => true do |t|
     t.string   "name"
