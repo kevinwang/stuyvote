@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606210436) do
+ActiveRecord::Schema.define(:version => 20130606210947) do
+
+  create_table "elections", :force => true do |t|
+    t.string   "name"
+    t.integer  "grade"
+    t.integer  "num_choices"
+    t.boolean  "enabled"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "students", :force => true do |t|
     t.string   "osis_digest"
