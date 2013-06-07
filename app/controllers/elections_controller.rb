@@ -1,4 +1,6 @@
 class ElectionsController < ApplicationController
+  before_filter :authenticate_admin!
+
   def new
     @election = Election.new
   end

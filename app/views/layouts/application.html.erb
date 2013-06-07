@@ -10,6 +10,19 @@
 <body>
   <h1>Stuyvote</h1>
 
+  <% if notice %>
+    <div id="notice"><p><strong><%= notice %></strong></p></div>
+    <script type="text/javascript">setTimeout(function(){ $("#notice").hide() }, 5000);</script>
+  <% end %>
+  <% if alert %>
+    <div id="alert"><p><strong><%= alert %></strong></p></div>
+    <script type="text/javascript">setTimeout(function(){ $("#alert").hide() }, 5000);</script>
+  <% end %>
+
+  <% if admin_signed_in? and not (request.fullpath == '/' or request.fullpath.include? '/choose')  %>
+    <%= link_to 'Sign out', :destroy_admin_session, :method => :delete %>
+  <% end %>
+
 <%= yield %>
 
 </body>

@@ -1,4 +1,6 @@
 Stuyvote::Application.routes.draw do
+  devise_for :admins
+
   resources :elections
   resources :candidates
 

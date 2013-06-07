@@ -1,10 +1,5 @@
 <h2>Swipe ID card</h2>
 
-<% if flash[:notice] %>
-  <div id="notice"><p><strong><%= flash[:notice] %></strong></p></div>
-  <script type="text/javascript">setTimeout(function(){ $("#notice").hide() }, 5000);</script>
-<% end %>
-
 <%= form_tag '/choose' do %>
   <input type="text" name="osis" /><br />
   <input type="submit" style="visibility: hidden;" />
