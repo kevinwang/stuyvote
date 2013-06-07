@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  */
 body {
     font-family: Tahoma, Geneva, sans-serif;
@@ -17,4 +16,5 @@ body {
 h1 {
     font-size: 3em;
     text-transform: uppercase;
+    text-align: center;
 }

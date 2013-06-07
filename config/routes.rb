@@ -1,4 +1,7 @@
 Stuyvote::Application.routes.draw do
+  resources :elections
+  resources :candidates
+
   post 'choose' => 'votes#new'
   post 'votes' => 'votes#create'
 
