@@ -5,10 +5,10 @@
   <script type="text/javascript">setTimeout(function(){ $("#notice").hide() }, 5000);</script>
 <% end %>
 
-<form name="osisform" action="/choose" method="post">
+<%= form_tag '/choose' do %>
   <input type="text" name="osis" /><br />
   <input type="submit" style="visibility: hidden;" />
-</form>
+<% end %>
 
 <script>
   $(document).ready(function() {

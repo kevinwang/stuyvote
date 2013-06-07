@@ -1,29 +1,21 @@
 <p>If you do not wish to vote in a particular election, leave it blank.</p>
-<form action="/votes" method="post" name="choices">
-  <% @student.elections.each do |election| %>
+<%= form_tag '/votes' do |f| %>
+  <% @elections.each do |election| %>
     <h2><%= election.name %></h2>
+    <h4>Select up to <%= election.num_choices - Vote.where('student_id = ?', @student.id).where(:candidate_id => election.candidates).count %> candidates</h4>
     <% election.candidates.each do |candidate| %>
-      <input type="checkbox" name="election_<%= election.id %>" id="choice_<%= election.id %>_<%= candidate.id %>" value="<%= candidate.id %>" />
-      <label for="choice_<%= election.id %>_<%= candidate.id %>"><%= candidate.name %></label><br />
+      <input type="checkbox" name="election_<%= election.id %>[]" id="choice_<%= election.id %>_<%= candidate.id %>" value="<%= candidate.id %>" />
+      <label for="choice_<%= election.id %>_<%= candidate.id %>[]"><%= candidate.name %></label><br />
     <% end %>
+    <script>
+      $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]").click(function () {
+        var max = $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]:checked").length >= <%= election.num_choices - Vote.where('student_id = ?', @student.id).where(:candidate_id => election.candidates).count %>;
+        $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]").not(":checked").attr("disabled", max);
+      });
+    </script>
   <% end %>
   <br />
+  <input type="hidden" name="student_id" value="<%= @student.id %>" />
   <button type="button" onclick="clearRadios()">Clear</button>
   <input type="submit" value="Submit" onclick="return confirm('Are you sure?');" />
-</form>
-
-<script>
-  var elections = [];
-  $.each($('input:checkbox'), function() {
-    if ($.inArray(this.name, election) < 0) {
-      elections.push(this.name);
-    }
-  });
-
-  for (var i = 0; i < elections.length; i++) {
-    $("input[type=checkbox][name=" + elections[i] + "]").click(function () {
-      var max = $("input[type=checkbox][name=" + elections[i] + "]:checked").length >= 4;
-      $("input[type=checkbox][name=" + elections[i] + "]").not(":checked").attr("disabled", max);
-    });
-  }
-</script>
+<% end %>
