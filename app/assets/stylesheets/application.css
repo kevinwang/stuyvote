@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
  */
+body {
+    font-family: Tahoma, Geneva, sans-serif;
+}
+h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+}
