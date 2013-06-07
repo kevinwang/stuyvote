@@ -1,4 +1,5 @@
 Stuyvote::Application.routes.draw do
+  post 'choose' => 'votes#new'
   post 'votes' => 'votes#create'
 
   # The priority is based upon order of creation:

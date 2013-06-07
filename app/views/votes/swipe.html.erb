@@ -1,13 +1,11 @@
-<h1>Stuyvote</h1>
-
 <h2>Swipe ID card</h2>
 
 <% if flash[:notice] %>
   <div id="notice"><p><strong><%= flash[:notice] %></strong></p></div>
-  <script type="text/javascript">setTimeout(function(){document.getElementById('notice').style.display = 'none'}, 5000);</script>
+  <script type="text/javascript">setTimeout(function(){ $("#notice").hide() }, 5000);</script>
 <% end %>
 
-<form name="osisform" action="" method="post">
+<form name="osisform" action="/choose" method="post">
   <input type="text" name="osis" /><br />
   <input type="submit" style="visibility: hidden;" />
 </form>
@@ -19,6 +17,5 @@
       $("form [name=osis]").focus();
       return false;
     });
-    $("body").disableSelection();
   });
 </script>

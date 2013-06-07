@@ -1,2 +1,29 @@
-<h1>Votes#new</h1>
-<p>Find me in app/views/votes/new.html.erb</p>
+<p>If you do not wish to vote in a particular election, leave it blank.</p>
+<form action="/votes" method="post" name="choices">
+  <% @student.elections.each do |election| %>
+    <h2><%= election.name %></h2>
+    <% election.candidates.each do |candidate| %>
+      <input type="checkbox" name="election_<%= election.id %>" id="choice_<%= election.id %>_<%= candidate.id %>" value="<%= candidate.id %>" />
+      <label for="choice_<%= election.id %>_<%= candidate.id %>"><%= candidate.name %></label><br />
+    <% end %>
+  <% end %>
+  <br />
+  <button type="button" onclick="clearRadios()">Clear</button>
+  <input type="submit" value="Submit" onclick="return confirm('Are you sure?');" />
+</form>
+
+<script>
+  var elections = [];
+  $.each($('input:checkbox'), function() {
+    if ($.inArray(this.name, election) < 0) {
+      elections.push(this.name);
+    }
+  });
+
+  for (var i = 0; i < elections.length; i++) {
+    $("input[type=checkbox][name=" + elections[i] + "]").click(function () {
+      var max = $("input[type=checkbox][name=" + elections[i] + "]:checked").length >= 4;
+      $("input[type=checkbox][name=" + elections[i] + "]").not(":checked").attr("disabled", max);
+    });
+  }
+</script>
