@@ -11,7 +11,7 @@ class ElectionsController < ApplicationController
       flash[:notice] = 'Election created successfully.'
       redirect_to @election
     else
-      flash[:notice] = @student.errors.full_messages.join('<br>').html_safe
+      flash[:alert] = @student.errors.full_messages.join('<br>').html_safe
       render :new_election
     end
   end
@@ -22,7 +22,7 @@ class ElectionsController < ApplicationController
       flash[:notice] = 'Election updated successfully.'
       redirect_to @election
     else
-      flash[:notice] = @student.errors.full_messages.join('<br>').html_safe
+      flash[:alert] = @student.errors.full_messages.join('<br>').html_safe
       render :edit_election
     end
   end

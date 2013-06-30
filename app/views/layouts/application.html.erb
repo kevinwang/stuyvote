@@ -24,12 +24,11 @@
         <script type="text/javascript">setTimeout(function(){ $("#alert").fadeOut() }, 5000);</script>
       <% end %>
 
+      <%= yield %>
+
       <% if admin_signed_in? and not (request.fullpath == '/' or request.fullpath.include? '/choose')  %>
         <%= link_to 'Sign out', :destroy_admin_session, :method => :delete %>
       <% end %>
-
-      <%= yield %>
-
     </div>
   </body>
 </html>

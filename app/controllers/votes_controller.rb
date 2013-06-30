@@ -6,19 +6,19 @@ class VotesController < ApplicationController
 
   def new
     if params[:osis].length == 12
-      redirect_to root_url, :notice => 'Wrong barcode, flip your card over.'
+      redirect_to root_url, :alert => 'Wrong barcode, flip your card over.'
       return
     end
 
     @student = Student.where(:osis_digest => Digest::MD5.hexdigest(params[:osis])).first
     if not @student
-      redirect_to root_url, :notice => 'Student does not exist.'
+      redirect_to root_url, :alert => 'Student does not exist.'
       return
     end
 
     @elections = @student.elections.select { |election| Vote.where('student_id = ?', @student.id).where(:candidate_id => election.candidates).count < election.num_choices }
     if @elections.empty?
-      redirect_to root_url, :notice => 'You have already voted in all available elections.'
+      redirect_to root_url, :alert => 'You have already voted in all available elections.'
     end
   end
 
@@ -32,7 +32,7 @@ class VotesController < ApplicationController
         if @vote.save
           redirect_to root_url, :notice => 'You have successfully voted.'
         else
-          flash[:notice] = 'Something went wrong!'
+          flash[:alert] = 'Something went wrong!'
           render :action => 'new'
         end
       end
