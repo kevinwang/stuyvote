@@ -12,12 +12,16 @@
       <h1>Stuyvote</h1>
 
       <% if notice %>
-        <div id="notice"><p><strong><%= notice %></strong></p></div>
-        <script type="text/javascript">setTimeout(function(){ $("#notice").hide() }, 5000);</script>
+        <div class="alert alert-success" id="notice">
+          <%= notice %>
+        </div>
+        <script type="text/javascript">setTimeout(function(){ $("#notice").fadeOut() }, 5000);</script>
       <% end %>
       <% if alert %>
-        <div id="alert"><p><strong><%= alert %></strong></p></div>
-        <script type="text/javascript">setTimeout(function(){ $("#alert").hide() }, 5000);</script>
+        <div class="alert alert-error" id="alert">
+          <%= alert %>
+        </div>
+        <script type="text/javascript">setTimeout(function(){ $("#alert").fadeOut() }, 5000);</script>
       <% end %>
 
       <% if admin_signed_in? and not (request.fullpath == '/' or request.fullpath.include? '/choose')  %>
