@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 
 gem "devise", "~> 2.2.4"
+gem "flatui-rails"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
