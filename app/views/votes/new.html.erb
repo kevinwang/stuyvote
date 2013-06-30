@@ -4,13 +4,16 @@
     <h2><%= election.name %></h2>
     <h4>Select up to <%= election.num_choices - Vote.where('student_id = ?', @student.id).where(:candidate_id => election.candidates).count %> candidates</h4>
     <% election.candidates.each do |candidate| %>
-      <input type="checkbox" name="election_<%= election.id %>[]" id="choice_<%= election.id %>_<%= candidate.id %>" value="<%= candidate.id %>" />
-      <label for="choice_<%= election.id %>_<%= candidate.id %>[]"><%= candidate.name %></label><br />
+      <label class="checkbox" for="choice_<%= election.id %>_<%= candidate.id %>">
+        <input type="checkbox" name="election_<%= election.id %>[]" value="<%= candidate.id %>" id="choice_<%= election.id %>_<%= candidate.id %>" data-toggle="checkbox">
+        <%= candidate.name %>
+      </label>
     <% end %>
     <script>
       $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]").click(function () {
         var max = $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]:checked").length >= <%= election.num_choices - Vote.where('student_id = ?', @student.id).where(:candidate_id => election.candidates).count %>;
         $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]").not(":checked").attr("disabled", max);
+        $("input[type=checkbox][name=election_<%= election.id %>\\[\\]]").not(":checked").parent().toggleClass("disabled", max);
       });
     </script>
   <% end %>
