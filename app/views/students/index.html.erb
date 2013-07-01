@@ -1,4 +1,4 @@
-<h2>Students <small><%= Student.count %> total &mdash; Last updated <%= Student.first.created_at.to_formatted_s :long %> UTC</small></h2>
+<h2>Students <small><%= Student.count %> total<% if Student.count > 0 %> &mdash; Last updated <%= Student.first.created_at.to_formatted_s :long %> UTC<% end %></small></h2>
 
 <div class="row">
 <span class="span3">Freshmen: <%= Student.where(grade: 9).count %></span>
