@@ -27,15 +27,20 @@ class VotesController < ApplicationController
     elections.keys.each do |key|
       election_id = /\d+$/.match key
       elections[key].each do |candidate_id|
-        @vote = Student.find(params[:student_id]).votes.build
-        @vote.candidate = Candidate.find(candidate_id)
-        if @vote.save
-          redirect_to root_url, :notice => 'You have successfully voted.'
+        unless Vote.where(student_id: params[:student_id], candidate_id: candidate_id).count > 0
+          @vote = Student.find(params[:student_id]).votes.build
+          @vote.candidate = Candidate.find(candidate_id)
+          if @vote.save
+            flash[:notice] = 'You have successfully voted.'
+          else
+            flash[:alert] = 'Something went wrong!'
+            render :action => 'new'
+          end
         else
-          flash[:alert] = 'Something went wrong!'
-          render :action => 'new'
+          flash[:alert] = 'No ballot stuffing! That vote didn\'t count. Try again.'
         end
       end
+      redirect_to root_url
     end
   end
 end
