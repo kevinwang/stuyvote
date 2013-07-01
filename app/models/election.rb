@@ -5,6 +5,7 @@ class Election < ActiveRecord::Base
   validates :num_choices, presence: true
 
   def choices_remaining(student)
-    self.num_choices - Vote.where(:student_id => student.id).where(:candidate_id => self.candidates).count
+    # Second argument in where is a subset condition (IN)
+    self.num_choices - Vote.where(student_id: student.id, candidate_id: self.candidates).count
   end
 end

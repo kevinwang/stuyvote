@@ -5,13 +5,13 @@ class Student < ActiveRecord::Base
   def elections
     case self.grade
     when 9
-      Election.where(:freshmen_eligible => true)
+      Election.where(freshmen_eligible: true, enabled: true)
     when 10
-      Election.where(:sophomores_eligible => true)
+      Election.where(sophomores_eligible: true, enabled: true)
     when 11
-      Election.where(:juniors_eligible => true)
+      Election.where(juniors_eligible: true, enabled: true)
     when 12
-      Election.where(:seniors_eligible => true)
+      Election.where(seniors_eligible: true, enabled: true)
     end
   end
 end
