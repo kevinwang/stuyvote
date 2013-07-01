@@ -1,8 +1,8 @@
 <h2>Elections</h2>
-<p><%= link_to 'New', :new_election %></p>
+<p><%= link_to 'New', :new_election, :class => 'btn' %></p>
 
-<ul>
+<table class="table">
   <% @elections.each do |election| %>
-    <li><%= link_to election.name, election %></li>
+    <tr><td><%= link_to election.name, election %></td></tr>
   <% end %>
-</ul>
+</table>
