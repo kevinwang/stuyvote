@@ -6,13 +6,13 @@ class ElectionsController < ApplicationController
   end
 
   def create
-    @election = Election.new params[:student]
+    @election = Election.new params[:election]
     if @election.save
       flash[:notice] = 'Election created successfully.'
       redirect_to @election
     else
-      flash[:alert] = @student.errors.full_messages.join('<br>').html_safe
-      render :new_election
+      flash[:alert] = @election.errors.full_messages.join('<br>').html_safe
+      render action: :new
     end
   end
 
@@ -22,7 +22,7 @@ class ElectionsController < ApplicationController
       flash[:notice] = 'Election updated successfully.'
       redirect_to @election
     else
-      flash[:alert] = @student.errors.full_messages.join('<br>').html_safe
+      flash[:alert] = @election.errors.full_messages.join('<br>').html_safe
       render :edit_election
     end
   end
@@ -32,7 +32,7 @@ class ElectionsController < ApplicationController
   end
 
   def destroy
-    @election.find(params[:id]).destroy
+    Election.find(params[:id]).destroy
     flash[:notice] = 'Election deleted successfully.'
     redirect_to :controller => 'elections', :action => 'index'
   end

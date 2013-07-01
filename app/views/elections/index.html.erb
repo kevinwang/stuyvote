@@ -3,6 +3,14 @@
 
 <table class="table">
   <% @elections.each do |election| %>
-    <tr><td><%= link_to election.name, election %></td></tr>
+    <tr>
+      <td><%= link_to election.name, election %>
+        <% if election.enabled? %>
+          <span class="label label-success pull-right">Enabled</span>
+        <% else %>
+          <span class="label label-important pull-right">Disabled</span>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 </table>
