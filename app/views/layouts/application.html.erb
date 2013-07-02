@@ -4,7 +4,7 @@
     <% if request.fullpath == '/' or request.fullpath == '/choose' %>
       <title>Stuyvote</title>
     <% else %>
-      <title>Stuyvote BoE Panel</title>
+      <title>Stuyvote BOE Panel</title>
     <% end %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -15,7 +15,7 @@
       <% if request.fullpath == '/' or request.fullpath == '/choose' %>
         <h1>Stuyvote</h1>
       <% else %>
-        <h1>Stuyvote BoE Panel</h1>
+        <h1>Stuyvote BOE Panel</h1>
       <% end %>
 
       <% unless request.fullpath == '/' or request.fullpath == '/choose' %>
