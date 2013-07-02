@@ -8,6 +8,8 @@ Stuyvote::Application.routes.draw do
   post 'choose' => 'votes#new'
   post 'votes' => 'votes#create'
 
+  get 'admin', to: redirect('/elections')
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
