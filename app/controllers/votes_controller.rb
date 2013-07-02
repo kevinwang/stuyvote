@@ -16,7 +16,7 @@ class VotesController < ApplicationController
       return
     end
 
-    @elections = @student.elections.select { |election| Vote.where('student_id = ?', @student.id).where(:candidate_id => election.candidates).count < election.num_choices }
+    @elections = @student.elections.select { |election| election.choices_remaining(@student) > 0 }
     if @elections.empty?
       redirect_to root_url, :alert => 'You have already voted in all available elections.'
     end
