@@ -1,9 +1,9 @@
 <p>If you do not wish to vote in a particular election, leave it blank.</p>
 <%= form_tag '/votes' do |f| %>
-  <% @elections.each do |election| %>
+  <% @elections.sort { |a, b| a.name <=> b.name }.each do |election| %>
     <h2><%= election.name %></h2>
     <h4>Select up to <%= election.choices_remaining @student %> candidate<% if election.choices_remaining(@student) != 1 %>s<% end %></h4>
-    <% election.candidates.each do |candidate| %>
+    <% election.candidates.sort { |a, b| a.name <=> b.name }.each do |candidate| %>
       <label class="checkbox" for="choice_<%= election.id %>_<%= candidate.id %>">
         <input type="checkbox" name="election_<%= election.id %>[]" value="<%= candidate.id %>" id="choice_<%= election.id %>_<%= candidate.id %>" data-toggle="checkbox">
         <%= candidate.name %>
