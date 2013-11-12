@@ -35,12 +35,13 @@ class VotesController < ApplicationController
           else
             flash[:alert] = 'Something went wrong!'
             render :action => 'new'
+            return
           end
         else
           flash[:alert] = 'No ballot stuffing! That vote didn\'t count. Try again.'
         end
       end
-      redirect_to root_url
     end
+    redirect_to root_url
   end
 end
