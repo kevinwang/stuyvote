@@ -8,4 +8,12 @@ class Election < ActiveRecord::Base
     # Second argument in where is a subset condition (IN)
     self.num_choices - Vote.where(student_id: student.id, candidate_id: self.candidates).count
   end
+
+  def total_votes
+    Vote.where(candidate_id: self.candidates).count
+  end
+
+  def unique_voters
+    Vote.where(candidate_id: self.candidates).collect { |v| v.student_id }.uniq.size
+  end
 end

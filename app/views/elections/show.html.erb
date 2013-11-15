@@ -37,7 +37,7 @@
   <% end %>
 </table>
 
-<h3>Results <small><%= Vote.where(candidate_id: @election.candidates).count %> votes total</small></h3>
+<h3>Results <small><%= @election.total_votes %> votes total, <%= @election.unique_voters %> unique voters</small></h3>
 <ol>
   <% @election.candidates.sort_by { |candidate| candidate.num_votes }.reverse.each do |candidate| %>
     <li><%= candidate.name %> - <%= candidate.num_votes %><% if Vote.where(candidate_id: @election.candidates).count > 0 %> (<%= '%.1f' % (100.0 * candidate.num_votes / Vote.where(candidate_id: @election.candidates).count) %>%)<% end %></li>
